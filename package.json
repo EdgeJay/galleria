@@ -1,8 +1,8 @@
 {
   "name": "galleria",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Thumbnail gallery with inline previewer",
-  "main": "src/js/index.js",
+  "main": "dist/js/galleria.js",
   "scripts": {
     "build-dev": "NODE_ENV=development gulp sass-webpack",
     "build-prod": "NODE_ENV=production gulp sass-webpack",
