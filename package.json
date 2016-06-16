@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/EdgeJay/simple-toaster.git"
+    "url": "https://github.com/EdgeJay/galleria.git"
   },
   "keywords": [
     "javascript",
@@ -24,7 +24,7 @@
   "author": "Wu Huijie",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/EdgeJay/simple-toaster/issues"
+    "url": "https://github.com/EdgeJay/galleria/issues"
   },
   "devDependencies": {
     "css-loader": "^0.23.1",
@@ -52,5 +52,5 @@
     "dotenv": "^2.0.0",
     "tween.js": "^16.3.4"
   },
-  "homepage": "https://github.com/EdgeJay/simple-toaster#readme"
+  "homepage": "https://github.com/EdgeJay/galleria#readme"
 }
