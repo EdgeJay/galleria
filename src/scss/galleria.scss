@@ -1,0 +1,36 @@
+.galleria {
+    .galleria-section {
+        text-align: center;
+    }
+
+    .galleria-thumbnail {
+        display: inline-block;
+        margin: 0 5px;
+        vertical-align: top;
+        width: 100px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        &.expanded {
+            transform: scale(1.05);
+        }
+    }
+
+    .galleria-previewer {
+        display: block;
+        box-sizing: border-box;
+        float: left;
+        width: 100%;
+        height: 0px;
+        background: #ccc;
+        margin-top: 7px;
+        overflow: hidden;
+        transition: height 0.3s ease;
+    }
+}

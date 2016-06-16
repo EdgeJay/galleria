@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Galleria Basic Example</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/galleria.css">
+        <style>
+            body {
+                height: 3000px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-3">Galleria</h1>
+                <p class="lead">Thumbnail gallery with inline previewer</p>
+            </div>
+        </div>
+        <div id="container"></div>
+        <script src="../js/galleria.js"></script>
+        <script>
+            var thumbnailCreated = function (sectionId, data, elem) {
+
+            };
+
+            var thumbnailCanExpand = function (sectionId, thumbnailId) {
+                return true;
+            };
+
+            var thumbnailWillExpand = function (sectionId, thumbnailData, thumbnail, previewer) {
+
+            };
+
+            var thumbnailDidExpand = function (sectionId, thumbnailData, thumbnail, previewer) {
+
+            };
+
+            var thumbnailCanCollapse = function (sectionId, thumbnailId) {
+                return true;
+            };
+
+            var thumbnailWillCollapse = function (sectionId, thumbnailData, thumbnail, previewer) {
+
+            };
+
+            var thumbnailDidCollapse = function (sectionId, thumbnailData, thumbnail) {
+                
+            };
+
+            var galleria = new Galleria({
+                container: document.getElementById('container'),
+                onThumbnailCreated: thumbnailCreated,
+                onThumbnailCanExpand: thumbnailCanExpand,
+                onThumbnailWillExpand: thumbnailWillExpand,
+                onThumbnailDidExpand: thumbnailDidExpand,
+                onThumbnailCanCollapse: thumbnailCanCollapse,
+                onThumbnailWillCollapse: thumbnailWillCollapse,
+                onThumbnailDidCollapse: thumbnailDidCollapse
+            });
+            galleria.load([{
+                id: 'drama',
+                title: 'DRAMA',
+                thumbnails: [{
+                    id: 'iamlegend',
+                    src: '/examples/images/i_am_legend.jpeg',
+                    title: 'I Am Legend',
+                    description: 'When you\'re the last of the uninfected, you can only count on yourself. Will Smith stars in a sci-fi thriller from the director of Constantine--I Am Legend. After a biological war, Robert Neville is the last healthy human living on Earth, but he is not alone. The other humans have…'
+                }, {
+                    id: 'ninjaturtles',
+                    src: '/examples/images/ninja_turtles.jpeg',
+                    title: 'Ninja Turtles',
+                    description: 'Everyone\'s favorite turtles are back in LIVE action! Leonardo, Raphael, Donatello and Michelangelo are four genetically mutated turtles who have grown to human-sized, ninja-powered crime fighters living in the sewers of New York City…'
+                }, {
+                    id: 'tearsofsteel',
+                    src: '/examples/images/tears_of_steel.png',
+                    title: 'Tears of Steel',
+                    description: 'This short science fiction film is about a group of warriors and scientists who gather to stage a crucial event from the past in a desperate attempt to rescue the world from destructive robots. (Copyright 2012, Blender Foundation)'
+                }, {
+                    id: 'thetimetravellerswife',
+                    src: '/examples/images/the_time_travellers_wife.jpeg',
+                    title: 'The Time Traveler\'s Wife',
+                    description: 'What if you suddenly, unpredictably and uncontrollably traveled through time? Life can be harrowing for a time traveler, but in this romance about the victory of love over age and time, life is even more challenging for The Time Traveler\'s Wife. Clare (Rachel McAdams--Wedding Crashers, The Notebook) has been in…'
+                }, {
+                    id: 'greenlantern',
+                    src: '/examples/images/green_lantern.jpeg',
+                    title: 'Green Lantern',
+                    description: 'Bringing the enduringly popular superhero to the big screen for the first time, GREEN LANTERN stars Ryan Reynolds (X-Men Origins: Wolverine) in the title role, under the direction of Martin Campbell (Casino Royale). In a universe as vast as it is mysterious, a small but powerful force has existed for…'
+                }, {
+                    id: 'bahaynilola',
+                    src: '/examples/images/bahay_ni_lola.jpeg',
+                    title: 'Bahay Ni Lola',
+                    description: 'A family decided to get away from the stresses of city living and spend the holidays in their ancestral home in a far-off town. Little do they know that the quaint old house is haunted by the ghost of their long dead matriarch.'
+                }]
+            }, {
+                id: 'action',
+                title: 'ACTION',
+                thumbnails: [{
+                    id: 'iamlegend',
+                    src: '/examples/images/i_am_legend.jpeg',
+                    title: 'I Am Legend',
+                    description: 'When you\'re the last of the uninfected, you can only count on yourself. Will Smith stars in a sci-fi thriller from the director of Constantine--I Am Legend. After a biological war, Robert Neville is the last healthy human living on Earth, but he is not alone. The other humans have…'
+                }, {
+                    id: 'ninjaturtles',
+                    src: '/examples/images/ninja_turtles.jpeg',
+                    title: 'Ninja Turtles',
+                    description: 'Everyone\'s favorite turtles are back in LIVE action! Leonardo, Raphael, Donatello and Michelangelo are four genetically mutated turtles who have grown to human-sized, ninja-powered crime fighters living in the sewers of New York City…'
+                }, {
+                    id: 'tearsofsteel',
+                    src: '/examples/images/tears_of_steel.png',
+                    title: 'Tears of Steel',
+                    description: 'This short science fiction film is about a group of warriors and scientists who gather to stage a crucial event from the past in a desperate attempt to rescue the world from destructive robots. (Copyright 2012, Blender Foundation)'
+                }, {
+                    id: 'thetimetravellerswife',
+                    src: '/examples/images/the_time_travellers_wife.jpeg',
+                    title: 'The Time Traveler\'s Wife',
+                    description: 'What if you suddenly, unpredictably and uncontrollably traveled through time? Life can be harrowing for a time traveler, but in this romance about the victory of love over age and time, life is even more challenging for The Time Traveler\'s Wife. Clare (Rachel McAdams--Wedding Crashers, The Notebook) has been in…'
+                }, {
+                    id: 'greenlantern',
+                    src: '/examples/images/green_lantern.jpeg',
+                    title: 'Green Lantern',
+                    description: 'Bringing the enduringly popular superhero to the big screen for the first time, GREEN LANTERN stars Ryan Reynolds (X-Men Origins: Wolverine) in the title role, under the direction of Martin Campbell (Casino Royale). In a universe as vast as it is mysterious, a small but powerful force has existed for…'
+                }, {
+                    id: 'bahaynilola',
+                    src: '/examples/images/bahay_ni_lola.jpeg',
+                    title: 'Bahay Ni Lola',
+                    description: 'A family decided to get away from the stresses of city living and spend the holidays in their ancestral home in a far-off town. Little do they know that the quaint old house is haunted by the ghost of their long dead matriarch.'
+                }]
+            }]);
+        </script>
+    </body>
+</html>
