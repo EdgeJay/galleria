@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Galleria Basic Example</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/galleria.css">
         <style>
             body {
                 height: 3000px;
@@ -23,6 +22,10 @@
         <div id="container"></div>
         <script src="../js/galleria.js"></script>
         <script>
+            var sectionCreated = function (sectionId, data, elem) {
+                
+            };
+
             var thumbnailCreated = function (sectionId, data, elem) {
 
             };
@@ -48,11 +51,12 @@
             };
 
             var thumbnailDidCollapse = function (sectionId, thumbnailData, thumbnail) {
-                
+
             };
 
             var galleria = new Galleria({
                 container: document.getElementById('container'),
+                onSectionCreated: sectionCreated,
                 onThumbnailCreated: thumbnailCreated,
                 onThumbnailCanExpand: thumbnailCanExpand,
                 onThumbnailWillExpand: thumbnailWillExpand,

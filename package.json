@@ -1,6 +1,6 @@
 {
   "name": "galleria",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Thumbnail gallery with inline previewer",
   "main": "dist/js/galleria.js",
   "scripts": {

@@ -17,7 +17,7 @@ gulp.task('sass', function () {
         .pipe(sass.sync().on('error', sass.logError))
         .pipe(sourcemaps.init())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./dist/css'));
+        .pipe(gulp.dest('./src/css'));
 });
 
 gulp.task('sass-webpack', function (callback) {

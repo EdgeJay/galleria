@@ -2,17 +2,21 @@
 
 import TWEEN from 'tween.js';
 import Section from './section';
+import styles from '../css/galleria.css';
 
 export default class Galleria {
-    constructor({ container, thumbnailWidth, sectionTitleElementName='h2', titleElementName='h2',
-                  onThumbnailCreated, onThumbnailCanExpand, onThumbnailWillExpand,
-                  onThumbnailDidExpand, onThumbnailCanCollapse, onThumbnailWillCollapse,
-                  onThumbnailDidCollapse }={}) {
+    constructor({ container, thumbnailWidth,
+                  sectionTitleElementName='h2', titleElementName='h2',
+                  onSectionCreated, onThumbnailCreated,
+                  onThumbnailCanExpand, onThumbnailWillExpand,
+                  onThumbnailDidExpand, onThumbnailCanCollapse,
+                  onThumbnailWillCollapse, onThumbnailDidCollapse }={}) {
 
         this.container = container;
         this.thumbnailWidth = thumbnailWidth;
         this.sectionTitleElementName = sectionTitleElementName;
         this.titleElementName = titleElementName;
+        this.onSectionCreated = onSectionCreated;
         this.onThumbnailCreated = onThumbnailCreated;
         this.onThumbnailCanExpand = onThumbnailCanExpand;
         this.onThumbnailWillExpand = onThumbnailWillExpand;
@@ -69,6 +73,10 @@ export default class Galleria {
 
             section.init();
             this.container.appendChild(section.getNode());
+
+            if (typeof this.onSectionCreated === 'function') {
+                this.onSectionCreated(_data[i].id, _data[i], section);
+            }
 
             i++;
         }
