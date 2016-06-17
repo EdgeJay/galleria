@@ -28,7 +28,7 @@ gulp.task('webpack', function () {
     return gulp.src([])
         .pipe(webpacker({
             entry: {
-                galleria: './src/js/index.js'
+                galleria: './src/js/galleria.js'
             },
             output: {
                 filename: (process.env.NODE_ENV === 'production' ? '[name].min.js' : '[name].js')

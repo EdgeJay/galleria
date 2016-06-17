@@ -3,6 +3,9 @@
 import TWEEN from 'tween.js';
 import Section from './section';
 import styles from '../css/galleria.css';
+import polyfills from './polyfills';
+
+polyfills();
 
 export default class Galleria {
     constructor({ container, thumbnailWidth,
@@ -158,3 +161,5 @@ function animate(time) {
 }
 
 requestAnimationFrame(animate);
+
+window.Galleria = exports.Galleria;
