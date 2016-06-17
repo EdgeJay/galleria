@@ -12,6 +12,8 @@ export default class Section {
                   onThumbnailDidCollapse, scrollOffset=20 }={}) {
 
         this._node = null;
+        this._headerNode = null;
+        this._wrapperNode = null;
         this.data = data;
         this._id = data.id;
         this.thumbnailWidth = thumbnailWidth;
@@ -40,6 +42,15 @@ export default class Section {
         this._node = document.createElement('div');
         this._node.classList.add('galleria-section');
 
+        this._headerNode = document.createElement(this.sectionTitleElementName);
+        this._headerNode.classList.add('galleria-section-header');
+        this._headerNode.innerHTML = this.data.title;
+        this._node.appendChild(this._headerNode);
+
+        this._wrapperNode = document.createElement('div');
+        this._wrapperNode.classList.add('galleria-thumbnails-wrapper');
+        this._node.appendChild(this._wrapperNode);
+
         this.recreateThumbnails();
     }
 
@@ -56,9 +67,9 @@ export default class Section {
     }
 
     clearThumbnails() {
-        if (this._node) {
-            while (this._node.firstChild) {
-                this._node.removeChild(this._node.firstChild);
+        if (this._wrapperNode) {
+            while (this._wrapperNode.firstChild) {
+                this._wrapperNode.removeChild(this._wrapperNode.firstChild);
             }
         }
 
@@ -66,7 +77,7 @@ export default class Section {
     }
 
     recreateThumbnails() {
-        if (this._node) {
+        if (this._node && this._wrapperNode) {
             this.clearThumbnails();
 
             var i = 0, thumbnail = null, data = null;
@@ -89,7 +100,7 @@ export default class Section {
                     this.thumbnails.push(thumbnail);
 
                     thumbnail.init();
-                    this._node.appendChild(thumbnail.getNode());
+                    this._wrapperNode.appendChild(thumbnail.getNode());
 
                     // dispatch
                     if (typeof this.onThumbnailCreated === 'function') {

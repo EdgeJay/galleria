@@ -164,3 +164,5 @@ function animate(time) {
 }
 
 requestAnimationFrame(animate);
+
+window.Galleria = Galleria;
