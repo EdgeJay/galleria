@@ -4,10 +4,14 @@
   "description": "Thumbnail gallery with inline previewer",
   "main": "dist/js/galleria.js",
   "scripts": {
+    "prepublish": "npm run build-dev && npm run build-prod",
     "build-dev": "NODE_ENV=development gulp sass-webpack",
     "build-prod": "NODE_ENV=production gulp sass-webpack",
     "examples": "./node_modules/.bin/servedir ./dist 9091",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "babel": {
+    "presets": ["es2015", "stage-1", "stage-2", "stage-3"]
   },
   "repository": {
     "type": "git",
@@ -27,6 +31,15 @@
     "url": "https://github.com/EdgeJay/galleria/issues"
   },
   "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.9.1",
+    "babel-eslint": "^6.0.4",
+    "babel-loader": "^6.2.4",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-1": "^6.5.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "babel-preset-stage-3": "^6.5.0",
     "css-loader": "^0.23.1",
     "gulp": "^3.9.0",
     "gulp-flatten": "^0.2.0",
@@ -41,14 +54,6 @@
     "webpack-stream": "^3.1.0"
   },
   "dependencies": {
-    "babel-core": "^6.1.21",
-    "babel-eslint": "^4.1.6",
-    "babel-loader": "^6.2.3",
-    "babel-polyfill": "^6.2.0",
-    "babel-preset-es2015": "^6.1.18",
-    "babel-preset-stage-1": "^6.5.0",
-    "babel-preset-stage-2": "^6.5.0",
-    "babel-preset-stage-3": "^6.1.18",
     "dotenv": "^2.0.0",
     "tween.js": "^16.3.4"
   },

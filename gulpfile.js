@@ -57,7 +57,8 @@ gulp.task('webpack', function () {
             ],
             devtool: 'source-map'
         }))
-        .pipe(gulp.dest('./dist/js'));
+        .pipe(gulp.dest('./dist/js'))
+        .pipe(gulp.dest('./lib/js'));
 });
 
 gulp.task('watch', function () {
