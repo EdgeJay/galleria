@@ -9,7 +9,7 @@ polyfills();
 
 export default class Galleria {
     constructor({ container, thumbnailWidth,
-                  sectionTitleElementName='h2', titleElementName='h2',
+                  sectionTitleElementName='h2', titleElementName='h2', previewerBg='#ccc',
                   onSectionCreated, onThumbnailCreated,
                   onThumbnailCanExpand, onThumbnailWillExpand,
                   onThumbnailDidExpand, onThumbnailCanCollapse,
@@ -19,6 +19,7 @@ export default class Galleria {
         this.thumbnailWidth = thumbnailWidth;
         this.sectionTitleElementName = sectionTitleElementName;
         this.titleElementName = titleElementName;
+        this.previewerBg = previewerBg;
         this.onSectionCreated = onSectionCreated;
         this.onThumbnailCreated = onThumbnailCreated;
         this.onThumbnailCanExpand = onThumbnailCanExpand;
@@ -63,6 +64,8 @@ export default class Galleria {
         while (i < _data.length) {
             section = new Section({
                 data: _data[i],
+                previewerBg: this.previewerBg,
+                previewerHeight: this.previewerHeight,
                 onThumbnailCreated: this._onThumbnailCreated.bind(this),
                 onThumbnailCanExpand: this._onThumbnailCanExpand.bind(this),
                 onThumbnailWillExpand: this._onThumbnailWillExpand.bind(this),

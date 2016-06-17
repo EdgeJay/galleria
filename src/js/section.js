@@ -5,7 +5,8 @@ import Thumbnail from './thumbnail';
 import Previewer from './previewer';
 
 export default class Section {
-    constructor({ data, thumbnailWidth, sectionTitleElementName='h2', titleElementName='h2',
+    constructor({ data, thumbnailWidth, previewerBg='#ccc', previewerHeight,
+                  sectionTitleElementName='h2', titleElementName='h2',
                   onThumbnailCreated, onThumbnailCanExpand, onThumbnailWillExpand,
                   onThumbnailDidExpand, onThumbnailCanCollapse, onThumbnailWillCollapse,
                   onThumbnailDidCollapse, scrollOffset=20 }={}) {
@@ -14,6 +15,8 @@ export default class Section {
         this.data = data;
         this._id = data.id;
         this.thumbnailWidth = thumbnailWidth;
+        this.previewerBg = previewerBg;
+        this.previewerHeight = previewerHeight;
         this.sectionTitleElementName = sectionTitleElementName;
         this.titleElementName = titleElementName;
         this.onThumbnailCreated = onThumbnailCreated;
@@ -102,6 +105,8 @@ export default class Section {
     addPreviewer(thumbnail) {
         if (!this._previewer && thumbnail && thumbnail.getNode().parentNode) {
             this._previewer = new Previewer({
+                background: this.previewerBg,
+                previewerHeight: this.previewerHeight,
                 onOpened: this._onPreviewerOpened.bind(this),
                 onClosed: this._onPreviewerClosed.bind(this)
             });

@@ -96,6 +96,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var sectionTitleElementName = _ref$sectionTitleElem === undefined ? 'h2' : _ref$sectionTitleElem;
 	        var _ref$titleElementName = _ref.titleElementName;
 	        var titleElementName = _ref$titleElementName === undefined ? 'h2' : _ref$titleElementName;
+	        var _ref$previewerBg = _ref.previewerBg;
+	        var previewerBg = _ref$previewerBg === undefined ? '#ccc' : _ref$previewerBg;
 	        var onSectionCreated = _ref.onSectionCreated;
 	        var onThumbnailCreated = _ref.onThumbnailCreated;
 	        var onThumbnailCanExpand = _ref.onThumbnailCanExpand;
@@ -111,6 +113,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.thumbnailWidth = thumbnailWidth;
 	        this.sectionTitleElementName = sectionTitleElementName;
 	        this.titleElementName = titleElementName;
+	        this.previewerBg = previewerBg;
 	        this.onSectionCreated = onSectionCreated;
 	        this.onThumbnailCreated = onThumbnailCreated;
 	        this.onThumbnailCanExpand = onThumbnailCanExpand;
@@ -158,6 +161,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            while (i < _data.length) {
 	                section = new _section2.default({
 	                    data: _data[i],
+	                    previewerBg: this.previewerBg,
+	                    previewerHeight: this.previewerHeight,
 	                    onThumbnailCreated: this._onThumbnailCreated.bind(this),
 	                    onThumbnailCanExpand: this._onThumbnailCanExpand.bind(this),
 	                    onThumbnailWillExpand: this._onThumbnailWillExpand.bind(this),
@@ -1203,6 +1208,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        var data = _ref.data;
 	        var thumbnailWidth = _ref.thumbnailWidth;
+	        var _ref$previewerBg = _ref.previewerBg;
+	        var previewerBg = _ref$previewerBg === undefined ? '#ccc' : _ref$previewerBg;
+	        var previewerHeight = _ref.previewerHeight;
 	        var _ref$sectionTitleElem = _ref.sectionTitleElementName;
 	        var sectionTitleElementName = _ref$sectionTitleElem === undefined ? 'h2' : _ref$sectionTitleElem;
 	        var _ref$titleElementName = _ref.titleElementName;
@@ -1223,6 +1231,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.data = data;
 	        this._id = data.id;
 	        this.thumbnailWidth = thumbnailWidth;
+	        this.previewerBg = previewerBg;
+	        this.previewerHeight = previewerHeight;
 	        this.sectionTitleElementName = sectionTitleElementName;
 	        this.titleElementName = titleElementName;
 	        this.onThumbnailCreated = onThumbnailCreated;
@@ -1321,6 +1331,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function addPreviewer(thumbnail) {
 	            if (!this._previewer && thumbnail && thumbnail.getNode().parentNode) {
 	                this._previewer = new _previewer2.default({
+	                    background: this.previewerBg,
+	                    previewerHeight: this.previewerHeight,
 	                    onOpened: this._onPreviewerOpened.bind(this),
 	                    onClosed: this._onPreviewerClosed.bind(this)
 	                });
@@ -1568,15 +1580,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function Previewer() {
 	        var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	
+	        var _ref$previewerBg = _ref.previewerBg;
+	        var previewerBg = _ref$previewerBg === undefined ? '#ccc' : _ref$previewerBg;
+	        var _ref$height = _ref.height;
+	        var height = _ref$height === undefined ? 465 : _ref$height;
 	        var onOpened = _ref.onOpened;
 	        var onClosed = _ref.onClosed;
 	
 	        _classCallCheck(this, Previewer);
 	
+	        this.previewerBg = previewerBg;
+	        this.height = height;
 	        this.onOpened = onOpened;
 	        this.onClosed = onClosed;
 	        this._node = document.createElement('div');
 	        this._node.classList.add('galleria-previewer');
+	        this._node.style.backgroundColor = this.previewerBg;
 	        this._transitionEndEvent = this._findTransitionEvent();
 	        this._node.addEventListener(this._transitionEndEvent, this._onTransitionEnd.bind(this));
 	        this._opened = false;
@@ -1595,7 +1614,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var delay = arguments.length <= 0 || arguments[0] === undefined ? 50 : arguments[0];
 	
 	            setTimeout(function (_) {
-	                _this._node.style.height = '465px';
+	                _this._node.style.height = _this.height + 'px';
 	            }, delay);
 	        }
 	    }, {

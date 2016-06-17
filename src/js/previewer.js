@@ -1,11 +1,14 @@
 'use strict';
 
 export default class Previewer {
-    constructor({ onOpened, onClosed }={}) {
+    constructor({ previewerBg='#ccc', height=465, onOpened, onClosed }={}) {
+        this.previewerBg = previewerBg;
+        this.height = height;
         this.onOpened = onOpened;
         this.onClosed = onClosed;
         this._node = document.createElement('div');
         this._node.classList.add('galleria-previewer');
+        this._node.style.backgroundColor = this.previewerBg;
         this._transitionEndEvent = this._findTransitionEvent();
         this._node.addEventListener(this._transitionEndEvent, this._onTransitionEnd.bind(this));
         this._opened = false;
@@ -17,7 +20,7 @@ export default class Previewer {
 
     open(delay=50) {
         setTimeout(_ => {
-            this._node.style.height = `465px`;
+            this._node.style.height = `${this.height}px`;
         }, delay);
     }
 
