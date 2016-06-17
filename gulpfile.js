@@ -31,7 +31,10 @@ gulp.task('webpack', function () {
                 galleria: './src/js/galleria.js'
             },
             output: {
-                filename: (process.env.NODE_ENV === 'production' ? '[name].min.js' : '[name].js')
+                filename: (process.env.NODE_ENV === 'production' ? '[name].min.js' : '[name].js'),
+                library: 'galleria',
+                libraryTarget: 'umd',
+                umdNamedDefine: true
             },
             module: {
                 loaders: [{
