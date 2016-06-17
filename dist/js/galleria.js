@@ -1580,8 +1580,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function Previewer() {
 	        var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	
-	        var _ref$previewerBg = _ref.previewerBg;
-	        var previewerBg = _ref$previewerBg === undefined ? '#ccc' : _ref$previewerBg;
+	        var _ref$background = _ref.background;
+	        var background = _ref$background === undefined ? '#ccc' : _ref$background;
 	        var _ref$height = _ref.height;
 	        var height = _ref$height === undefined ? 465 : _ref$height;
 	        var onOpened = _ref.onOpened;
@@ -1589,13 +1589,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        _classCallCheck(this, Previewer);
 	
-	        this.previewerBg = previewerBg;
+	        this.background = background;
 	        this.height = height;
 	        this.onOpened = onOpened;
 	        this.onClosed = onClosed;
 	        this._node = document.createElement('div');
 	        this._node.classList.add('galleria-previewer');
-	        this._node.style.backgroundColor = this.previewerBg;
+	        this._node.style.backgroundColor = this.background;
 	        this._transitionEndEvent = this._findTransitionEvent();
 	        this._node.addEventListener(this._transitionEndEvent, this._onTransitionEnd.bind(this));
 	        this._opened = false;

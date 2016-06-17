@@ -1,14 +1,14 @@
 'use strict';
 
 export default class Previewer {
-    constructor({ previewerBg='#ccc', height=465, onOpened, onClosed }={}) {
-        this.previewerBg = previewerBg;
+    constructor({ background='#ccc', height=465, onOpened, onClosed }={}) {
+        this.background = background;
         this.height = height;
         this.onOpened = onOpened;
         this.onClosed = onClosed;
         this._node = document.createElement('div');
         this._node.classList.add('galleria-previewer');
-        this._node.style.backgroundColor = this.previewerBg;
+        this._node.style.backgroundColor = this.background;
         this._transitionEndEvent = this._findTransitionEvent();
         this._node.addEventListener(this._transitionEndEvent, this._onTransitionEnd.bind(this));
         this._opened = false;
