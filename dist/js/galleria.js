@@ -260,8 +260,6 @@
 	}
 	
 	requestAnimationFrame(animate);
-	
-	window.Galleria = exports.Galleria;
 
 /***/ },
 /* 1 */

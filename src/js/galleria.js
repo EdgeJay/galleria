@@ -161,5 +161,3 @@ function animate(time) {
 }
 
 requestAnimationFrame(animate);
-
-window.Galleria = exports.Galleria;
