@@ -106,6 +106,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var onThumbnailCanCollapse = _ref.onThumbnailCanCollapse;
 	        var onThumbnailWillCollapse = _ref.onThumbnailWillCollapse;
 	        var onThumbnailDidCollapse = _ref.onThumbnailDidCollapse;
+	        var _ref$scrollOffset = _ref.scrollOffset;
+	        var scrollOffset = _ref$scrollOffset === undefined ? 20 : _ref$scrollOffset;
 	
 	        _classCallCheck(this, Galleria);
 	
@@ -122,6 +124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.onThumbnailCanCollapse = onThumbnailCanCollapse;
 	        this.onThumbnailWillCollapse = onThumbnailWillCollapse;
 	        this.onThumbnailDidCollapse = onThumbnailDidCollapse;
+	        this.scrollOffset = scrollOffset;
 	        this.sections = [];
 	        this._expandedSection = null;
 	    }
@@ -169,7 +172,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    onThumbnailDidExpand: this._onThumbnailDidExpand.bind(this),
 	                    onThumbnailCanCollapse: this._onThumbnailCanCollapse.bind(this),
 	                    onThumbnailWillCollapse: this._onThumbnailWillCollapse.bind(this),
-	                    onThumbnailDidCollapse: this._onThumbnailDidCollapse.bind(this)
+	                    onThumbnailDidCollapse: this._onThumbnailDidCollapse.bind(this),
+	                    scrollOffset: this.scrollOffset
 	                });
 	
 	                this.sections.push(section);
