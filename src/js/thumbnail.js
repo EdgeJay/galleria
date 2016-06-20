@@ -3,7 +3,7 @@
 export default class Thumbnail {
     constructor({ data, thumbnailWidth=175, onThumbnailCanExpand, onThumbnailCanCollapse }={}) {
         this.data = data;
-        this._id = this.data.id;
+
         this.thumbnailWidth = thumbnailWidth;
         this.onThumbnailCanExpand = onThumbnailCanExpand;
         this.onThumbnailCanCollapse = onThumbnailCanCollapse;
@@ -13,18 +13,20 @@ export default class Thumbnail {
         this._node = document.createElement('div');
         this._node.classList.add('galleria-thumbnail');
         this._node.style.width = `${thumbnailWidth}px`;
-        this._node.addEventListener('click', this._onClick.bind(this));
-        this._imgNode = document.createElement('img');
-        this._imgNode.addEventListener('load', this._onImageLoaded.bind(this));
-        this._node.appendChild(this._imgNode);
+
+        if (this.data) {
+            this._id = this.data.id;
+            this._node.addEventListener('click', this._onClick.bind(this));
+            this._imgNode = document.createElement('img');
+            this._imgNode.addEventListener('load', this._onImageLoaded.bind(this));
+            this._node.appendChild(this._imgNode);
+        }
     }
 
     init() {
-        if (typeof this.data !== 'object') {
-            throw new Error('[Galleria] Unable to init thumbnail. Data must be of type object');
+        if (this.data && this._imgNode) {
+            this._imgNode.src = this.data.src;
         }
-
-        this._imgNode.src = this.data.src;
     }
 
     getId() {

@@ -1,6 +1,10 @@
 .galleria {
     .galleria-section {
-
+        &::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
     }
 
     .galleria-section-header {

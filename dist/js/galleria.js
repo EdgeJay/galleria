@@ -108,6 +108,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var onThumbnailDidCollapse = _ref.onThumbnailDidCollapse;
 	        var _ref$scrollOffset = _ref.scrollOffset;
 	        var scrollOffset = _ref$scrollOffset === undefined ? 20 : _ref$scrollOffset;
+	        var _ref$fillGaps = _ref.fillGaps;
+	        var fillGaps = _ref$fillGaps === undefined ? true : _ref$fillGaps;
+	        var _ref$minThumbnails = _ref.minThumbnails;
+	        var minThumbnails = _ref$minThumbnails === undefined ? 6 : _ref$minThumbnails;
+	        var _ref$ignoreEmptySecti = _ref.ignoreEmptySections;
+	        var ignoreEmptySections = _ref$ignoreEmptySecti === undefined ? true : _ref$ignoreEmptySecti;
 	
 	        _classCallCheck(this, Galleria);
 	
@@ -125,6 +131,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.onThumbnailWillCollapse = onThumbnailWillCollapse;
 	        this.onThumbnailDidCollapse = onThumbnailDidCollapse;
 	        this.scrollOffset = scrollOffset;
+	        this.fillGaps = fillGaps;
+	        this.minThumbnails = minThumbnails;
+	        this.ignoreEmptySections = ignoreEmptySections;
 	        this.sections = [];
 	        this._expandedSection = null;
 	    }
@@ -162,8 +171,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	            i = 0;
 	
 	            while (i < _data.length) {
+	                if (_data[i].thumbnails.length < 1 && this.ignoreEmptySections) {
+	                    continue;
+	                }
+	
 	                section = new _section2.default({
 	                    data: _data[i],
+	                    sectionTitleElementName: this.sectionTitleElementName,
 	                    previewerBg: this.previewerBg,
 	                    previewerHeight: this.previewerHeight,
 	                    onThumbnailCreated: this._onThumbnailCreated.bind(this),
@@ -173,7 +187,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    onThumbnailCanCollapse: this._onThumbnailCanCollapse.bind(this),
 	                    onThumbnailWillCollapse: this._onThumbnailWillCollapse.bind(this),
 	                    onThumbnailDidCollapse: this._onThumbnailDidCollapse.bind(this),
-	                    scrollOffset: this.scrollOffset
+	                    scrollOffset: this.scrollOffset,
+	                    fillGaps: this.fillGaps,
+	                    minThumbnails: this.minThumbnails
 	                });
 	
 	                this.sections.push(section);
@@ -1230,6 +1246,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var onThumbnailDidCollapse = _ref.onThumbnailDidCollapse;
 	        var _ref$scrollOffset = _ref.scrollOffset;
 	        var scrollOffset = _ref$scrollOffset === undefined ? 20 : _ref$scrollOffset;
+	        var _ref$fillGaps = _ref.fillGaps;
+	        var fillGaps = _ref$fillGaps === undefined ? true : _ref$fillGaps;
+	        var _ref$minThumbnails = _ref.minThumbnails;
+	        var minThumbnails = _ref$minThumbnails === undefined ? 6 : _ref$minThumbnails;
 	
 	        _classCallCheck(this, Section);
 	
@@ -1251,6 +1271,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.onThumbnailWillCollapse = onThumbnailWillCollapse;
 	        this.onThumbnailDidCollapse = onThumbnailDidCollapse;
 	        this.scrollOffset = scrollOffset;
+	        this.fillGaps = fillGaps;
+	        this.minThumbnails = minThumbnails;
 	        this.thumbnails = [];
 	        this._previewer = null;
 	        this._expandedThumbnail = null;
@@ -1310,6 +1332,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this.clearThumbnails();
 	
 	                var i = 0,
+	                    count = 0,
 	                    thumbnail = null,
 	                    data = null;
 	
@@ -1337,9 +1360,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        if (typeof this.onThumbnailCreated === 'function') {
 	                            this.onThumbnailCreated(this, thumbnail.getId(), thumbnail.getNode());
 	                        }
+	
+	                        count++;
 	                    }
 	
 	                    i++;
+	                }
+	
+	                if (this.fillGaps && count < this.minThumbnails) {
+	                    for (var k = 0; k < this.minThumbnails - count; k++) {
+	                        thumbnail = new _thumbnail2.default();
+	                        this.thumbnails.push(thumbnail);
+	                        this._wrapperNode.appendChild(thumbnail.getNode());
+	                    }
 	                }
 	            }
 	        }
@@ -1486,8 +1519,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1505,7 +1536,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _classCallCheck(this, Thumbnail);
 	
 	        this.data = data;
-	        this._id = this.data.id;
+	
 	        this.thumbnailWidth = thumbnailWidth;
 	        this.onThumbnailCanExpand = onThumbnailCanExpand;
 	        this.onThumbnailCanCollapse = onThumbnailCanCollapse;
@@ -1515,20 +1546,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._node = document.createElement('div');
 	        this._node.classList.add('galleria-thumbnail');
 	        this._node.style.width = thumbnailWidth + 'px';
-	        this._node.addEventListener('click', this._onClick.bind(this));
-	        this._imgNode = document.createElement('img');
-	        this._imgNode.addEventListener('load', this._onImageLoaded.bind(this));
-	        this._node.appendChild(this._imgNode);
+	
+	        if (this.data) {
+	            this._id = this.data.id;
+	            this._node.addEventListener('click', this._onClick.bind(this));
+	            this._imgNode = document.createElement('img');
+	            this._imgNode.addEventListener('load', this._onImageLoaded.bind(this));
+	            this._node.appendChild(this._imgNode);
+	        }
 	    }
 	
 	    _createClass(Thumbnail, [{
 	        key: 'init',
 	        value: function init() {
-	            if (_typeof(this.data) !== 'object') {
-	                throw new Error('[Galleria] Unable to init thumbnail. Data must be of type object');
+	            if (this.data && this._imgNode) {
+	                this._imgNode.src = this.data.src;
 	            }
-	
-	            this._imgNode.src = this.data.src;
 	        }
 	    }, {
 	        key: 'getId',
@@ -1725,7 +1758,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	// module
-	exports.push([module.id, ".galleria .galleria-section-header {\n  text-align: center; }\n\n.galleria .galleria-thumbnails-wrapper {\n  text-align: center; }\n\n.galleria .galleria-thumbnail {\n  display: inline-block;\n  margin: 0 5px;\n  vertical-align: top;\n  width: 100px;\n  cursor: pointer;\n  transition: transform 0.3s ease; }\n  .galleria .galleria-thumbnail img {\n    display: block;\n    width: 100%;\n    height: auto; }\n  .galleria .galleria-thumbnail.expanded {\n    transform: scale(1.05); }\n\n.galleria .galleria-previewer {\n  display: block;\n  box-sizing: border-box;\n  float: left;\n  width: 100%;\n  height: 0px;\n  background: #ccc;\n  margin-top: 7px;\n  overflow: hidden;\n  transition: height 0.3s ease; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiIiwic291cmNlcyI6WyJnYWxsZXJpYS5jc3MiXSwic291cmNlc0NvbnRlbnQiOlsiLmdhbGxlcmlhIC5nYWxsZXJpYS1zZWN0aW9uLWhlYWRlciB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjsgfVxuXG4uZ2FsbGVyaWEgLmdhbGxlcmlhLXRodW1ibmFpbHMtd3JhcHBlciB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjsgfVxuXG4uZ2FsbGVyaWEgLmdhbGxlcmlhLXRodW1ibmFpbCB7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgbWFyZ2luOiAwIDVweDtcbiAgdmVydGljYWwtYWxpZ246IHRvcDtcbiAgd2lkdGg6IDEwMHB4O1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjNzIGVhc2U7IH1cbiAgLmdhbGxlcmlhIC5nYWxsZXJpYS10aHVtYm5haWwgaW1nIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IGF1dG87IH1cbiAgLmdhbGxlcmlhIC5nYWxsZXJpYS10aHVtYm5haWwuZXhwYW5kZWQge1xuICAgIHRyYW5zZm9ybTogc2NhbGUoMS4wNSk7IH1cblxuLmdhbGxlcmlhIC5nYWxsZXJpYS1wcmV2aWV3ZXIge1xuICBkaXNwbGF5OiBibG9jaztcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgZmxvYXQ6IGxlZnQ7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDBweDtcbiAgYmFja2dyb3VuZDogI2NjYztcbiAgbWFyZ2luLXRvcDogN3B4O1xuICBvdmVyZmxvdzogaGlkZGVuO1xuICB0cmFuc2l0aW9uOiBoZWlnaHQgMC4zcyBlYXNlOyB9XG4iXSwiZmlsZSI6ImdhbGxlcmlhLmNzcyIsInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9 */\n", ""]);
+	exports.push([module.id, ".galleria .galleria-section::after {\n  content: \"\";\n  display: table;\n  clear: both; }\n\n.galleria .galleria-section-header {\n  text-align: center; }\n\n.galleria .galleria-thumbnails-wrapper {\n  text-align: center; }\n\n.galleria .galleria-thumbnail {\n  display: inline-block;\n  margin: 0 5px;\n  vertical-align: top;\n  width: 100px;\n  cursor: pointer;\n  transition: transform 0.3s ease; }\n  .galleria .galleria-thumbnail img {\n    display: block;\n    width: 100%;\n    height: auto; }\n  .galleria .galleria-thumbnail.expanded {\n    transform: scale(1.05); }\n\n.galleria .galleria-previewer {\n  display: block;\n  box-sizing: border-box;\n  float: left;\n  width: 100%;\n  height: 0px;\n  background: #ccc;\n  margin-top: 7px;\n  overflow: hidden;\n  transition: height 0.3s ease; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiIiwic291cmNlcyI6WyJnYWxsZXJpYS5jc3MiXSwic291cmNlc0NvbnRlbnQiOlsiLmdhbGxlcmlhIC5nYWxsZXJpYS1zZWN0aW9uOjphZnRlciB7XG4gIGNvbnRlbnQ6IFwiXCI7XG4gIGRpc3BsYXk6IHRhYmxlO1xuICBjbGVhcjogYm90aDsgfVxuXG4uZ2FsbGVyaWEgLmdhbGxlcmlhLXNlY3Rpb24taGVhZGVyIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyOyB9XG5cbi5nYWxsZXJpYSAuZ2FsbGVyaWEtdGh1bWJuYWlscy13cmFwcGVyIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyOyB9XG5cbi5nYWxsZXJpYSAuZ2FsbGVyaWEtdGh1bWJuYWlsIHtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICBtYXJnaW46IDAgNXB4O1xuICB2ZXJ0aWNhbC1hbGlnbjogdG9wO1xuICB3aWR0aDogMTAwcHg7XG4gIGN1cnNvcjogcG9pbnRlcjtcbiAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuM3MgZWFzZTsgfVxuICAuZ2FsbGVyaWEgLmdhbGxlcmlhLXRodW1ibmFpbCBpbWcge1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogYXV0bzsgfVxuICAuZ2FsbGVyaWEgLmdhbGxlcmlhLXRodW1ibmFpbC5leHBhbmRlZCB7XG4gICAgdHJhbnNmb3JtOiBzY2FsZSgxLjA1KTsgfVxuXG4uZ2FsbGVyaWEgLmdhbGxlcmlhLXByZXZpZXdlciB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICBmbG9hdDogbGVmdDtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMHB4O1xuICBiYWNrZ3JvdW5kOiAjY2NjO1xuICBtYXJnaW4tdG9wOiA3cHg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIHRyYW5zaXRpb246IGhlaWdodCAwLjNzIGVhc2U7IH1cbiJdLCJmaWxlIjoiZ2FsbGVyaWEuY3NzIiwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0= */\n", ""]);
 	
 	// exports
 

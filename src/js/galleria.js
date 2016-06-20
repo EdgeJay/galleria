@@ -14,7 +14,8 @@ export default class Galleria {
                   onThumbnailCanExpand, onThumbnailWillExpand,
                   onThumbnailDidExpand, onThumbnailCanCollapse,
                   onThumbnailWillCollapse, onThumbnailDidCollapse,
-                  scrollOffset=20 }={}) {
+                  scrollOffset=20, fillGaps=true, minThumbnails=6,
+                  ignoreEmptySections=true }={}) {
 
         this.container = container;
         this.thumbnailWidth = thumbnailWidth;
@@ -30,6 +31,9 @@ export default class Galleria {
         this.onThumbnailWillCollapse = onThumbnailWillCollapse;
         this.onThumbnailDidCollapse = onThumbnailDidCollapse;
         this.scrollOffset = scrollOffset;
+        this.fillGaps = fillGaps;
+        this.minThumbnails = minThumbnails;
+        this.ignoreEmptySections = ignoreEmptySections;
         this.sections = [];
         this._expandedSection = null;
     }
@@ -64,8 +68,13 @@ export default class Galleria {
         i = 0;
 
         while (i < _data.length) {
+            if (_data[i].thumbnails.length < 1 && this.ignoreEmptySections) {
+                continue;
+            }
+
             section = new Section({
                 data: _data[i],
+                sectionTitleElementName: this.sectionTitleElementName,
                 previewerBg: this.previewerBg,
                 previewerHeight: this.previewerHeight,
                 onThumbnailCreated: this._onThumbnailCreated.bind(this),
@@ -75,7 +84,9 @@ export default class Galleria {
                 onThumbnailCanCollapse: this._onThumbnailCanCollapse.bind(this),
                 onThumbnailWillCollapse: this._onThumbnailWillCollapse.bind(this),
                 onThumbnailDidCollapse: this._onThumbnailDidCollapse.bind(this),
-                scrollOffset: this.scrollOffset
+                scrollOffset: this.scrollOffset,
+                fillGaps: this.fillGaps,
+                minThumbnails: this.minThumbnails
             });
 
             this.sections.push(section);

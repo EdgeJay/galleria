@@ -9,7 +9,8 @@ export default class Section {
                   sectionTitleElementName='h2', titleElementName='h2',
                   onThumbnailCreated, onThumbnailCanExpand, onThumbnailWillExpand,
                   onThumbnailDidExpand, onThumbnailCanCollapse, onThumbnailWillCollapse,
-                  onThumbnailDidCollapse, scrollOffset=20 }={}) {
+                  onThumbnailDidCollapse, scrollOffset=20,
+                  fillGaps=true, minThumbnails=6 }={}) {
 
         this._node = null;
         this._headerNode = null;
@@ -29,6 +30,8 @@ export default class Section {
         this.onThumbnailWillCollapse = onThumbnailWillCollapse;
         this.onThumbnailDidCollapse = onThumbnailDidCollapse;
         this.scrollOffset = scrollOffset;
+        this.fillGaps = fillGaps;
+        this.minThumbnails = minThumbnails;
         this.thumbnails = [];
         this._previewer = null;
         this._expandedThumbnail = null;
@@ -80,7 +83,7 @@ export default class Section {
         if (this._node && this._wrapperNode) {
             this.clearThumbnails();
 
-            var i = 0, thumbnail = null, data = null;
+            var i = 0, count = 0, thumbnail = null, data = null;
 
             while (i < this.data.thumbnails.length) {
                 if (typeof this.data.thumbnails[i] === 'object') {
@@ -106,9 +109,19 @@ export default class Section {
                     if (typeof this.onThumbnailCreated === 'function') {
                         this.onThumbnailCreated(this, thumbnail.getId(), thumbnail.getNode());
                     }
+
+                    count++;
                 }
 
                 i++;
+            }
+
+            if (this.fillGaps && count < this.minThumbnails) {
+                for (var k = 0; k < this.minThumbnails - count; k++) {
+                    thumbnail = new Thumbnail();
+                    this.thumbnails.push(thumbnail);
+                    this._wrapperNode.appendChild(thumbnail.getNode());
+                }
             }
         }
     }
