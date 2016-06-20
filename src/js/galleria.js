@@ -69,6 +69,7 @@ export default class Galleria {
 
         while (i < _data.length) {
             if (_data[i].thumbnails.length < 1 && this.ignoreEmptySections) {
+                i++;
                 continue;
             }
 

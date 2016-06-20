@@ -172,6 +172,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	            while (i < _data.length) {
 	                if (_data[i].thumbnails.length < 1 && this.ignoreEmptySections) {
+	                    i++;
 	                    continue;
 	                }
 	
