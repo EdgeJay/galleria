@@ -55,6 +55,13 @@ export default class Section {
         this._node.appendChild(this._wrapperNode);
 
         this.recreateThumbnails();
+
+        if (this.thumbnails.length > 0) {
+            window.addEventListener('resize', event => { this._onWindowResize(event); });
+            setTimeout(_ => {
+                this._onWindowResize(null);
+            }, 100);
+        }
     }
 
     getId() {
@@ -232,6 +239,13 @@ export default class Section {
 
     _onPreviewerClosed(previewer) {
         console.log('closed');
+    }
+
+    _onWindowResize(event) {
+        if (this._headerNode && this.thumbnails && this.thumbnails.length > 0) {
+            const pos = this._getPositionInPage(this.thumbnails[0].getNode());
+            this._headerNode.style.marginLeft = `${pos.x}px`;
+        }
     }
 
     _getPositionInPage(elem) {
