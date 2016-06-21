@@ -113,6 +113,12 @@ export default class Galleria {
         this.sections = [];
     }
 
+    collapseSection() {
+        if (this._expandedSection) {
+            this._expandedSection.collapseThumbnail();
+        }
+    }
+
     _onThumbnailCreated(section, thumbnailId, elem) {
         if (typeof this.onThumbnailCreated === 'function') {
             this.onThumbnailCreated(section.getId(), thumbnailId, elem);

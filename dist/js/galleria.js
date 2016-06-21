@@ -217,6 +217,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.sections = [];
 	        }
 	    }, {
+	        key: 'collapseSection',
+	        value: function collapseSection() {
+	            if (this._expandedSection) {
+	                this._expandedSection.collapseThumbnail();
+	            }
+	        }
+	    }, {
 	        key: '_onThumbnailCreated',
 	        value: function _onThumbnailCreated(section, thumbnailId, elem) {
 	            if (typeof this.onThumbnailCreated === 'function') {
