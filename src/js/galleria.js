@@ -127,9 +127,9 @@ export default class Galleria {
         }
     }
 
-    _onThumbnailCreated(section, thumbnailId, elem) {
+    _onThumbnailCreated(section, thumbnailId, thumbnailData, elem) {
         if (typeof this.onThumbnailCreated === 'function') {
-            this.onThumbnailCreated(section.getId(), thumbnailId, elem);
+            this.onThumbnailCreated(section.getId(), thumbnailId, thumbnailData, elem);
         }
     }
 

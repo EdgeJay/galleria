@@ -114,7 +114,7 @@ export default class Section {
 
                     // dispatch
                     if (typeof this.onThumbnailCreated === 'function') {
-                        this.onThumbnailCreated(this, thumbnail.getId(), thumbnail.getNode());
+                        this.onThumbnailCreated(this, thumbnail.getId(), data, thumbnail.getNode());
                     }
 
                     count++;
