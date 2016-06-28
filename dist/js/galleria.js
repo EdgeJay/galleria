@@ -257,9 +257,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    }, {
 	        key: '_onThumbnailCreated',
-	        value: function _onThumbnailCreated(section, thumbnailId, elem) {
+	        value: function _onThumbnailCreated(section, thumbnailId, thumbnailData, elem) {
 	            if (typeof this.onThumbnailCreated === 'function') {
-	                this.onThumbnailCreated(section.getId(), thumbnailId, elem);
+	                this.onThumbnailCreated(section.getId(), thumbnailId, thumbnailData, elem);
 	            }
 	        }
 	    }, {
@@ -1409,7 +1409,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	                        // dispatch
 	                        if (typeof this.onThumbnailCreated === 'function') {
-	                            this.onThumbnailCreated(this, thumbnail.getId(), thumbnail.getNode());
+	                            this.onThumbnailCreated(this, thumbnail.getId(), data, thumbnail.getNode());
 	                        }
 	
 	                        count++;
