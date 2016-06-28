@@ -224,6 +224,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    }, {
+	        key: 'resizeThumbnails',
+	        value: function resizeThumbnails(_ref2) {
+	            var width = _ref2.width;
+	
+	            if (!isNaN(width)) {
+	                var _iteratorNormalCompletion = true;
+	                var _didIteratorError = false;
+	                var _iteratorError = undefined;
+	
+	                try {
+	                    for (var _iterator = this.sections[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                        var section = _step.value;
+	
+	                        section.resizeThumbnails({ width: width });
+	                    }
+	                } catch (err) {
+	                    _didIteratorError = true;
+	                    _iteratorError = err;
+	                } finally {
+	                    try {
+	                        if (!_iteratorNormalCompletion && _iterator.return) {
+	                            _iterator.return();
+	                        }
+	                    } finally {
+	                        if (_didIteratorError) {
+	                            throw _iteratorError;
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	    }, {
 	        key: '_onThumbnailCreated',
 	        value: function _onThumbnailCreated(section, thumbnailId, elem) {
 	            if (typeof this.onThumbnailCreated === 'function') {
@@ -1436,6 +1468,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    }, {
+	        key: 'resizeThumbnails',
+	        value: function resizeThumbnails(_ref2) {
+	            var width = _ref2.width;
+	
+	            if (!isNaN(width)) {
+	                var _iteratorNormalCompletion = true;
+	                var _didIteratorError = false;
+	                var _iteratorError = undefined;
+	
+	                try {
+	                    for (var _iterator = this.thumbnails[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                        var thumbnail = _step.value;
+	
+	                        thumbnail.resize({ width: width });
+	                    }
+	                } catch (err) {
+	                    _didIteratorError = true;
+	                    _iteratorError = err;
+	                } finally {
+	                    try {
+	                        if (!_iteratorNormalCompletion && _iterator.return) {
+	                            _iterator.return();
+	                        }
+	                    } finally {
+	                        if (_didIteratorError) {
+	                            throw _iteratorError;
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	    }, {
 	        key: '_onThumbnailCanExpand',
 	        value: function _onThumbnailCanExpand(thumbnail) {
 	            var _this2 = this;
@@ -1622,6 +1686,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	                } else {
 	                    this._node.classList.remove('expanded');
 	                }
+	            }
+	        }
+	    }, {
+	        key: 'resize',
+	        value: function resize(_ref2) {
+	            var width = _ref2.width;
+	
+	            if (this._node) {
+	                this._node.style.width = width + 'px';
 	            }
 	        }
 	    }, {

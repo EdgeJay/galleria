@@ -171,6 +171,14 @@ export default class Section {
         }
     }
 
+    resizeThumbnails({ width }) {
+        if (!isNaN(width)) {
+            for (var thumbnail of this.thumbnails) {
+                thumbnail.resize({ width });
+            }
+        }
+    }
+
     _onThumbnailCanExpand(thumbnail) {
         let proceed = true;
 

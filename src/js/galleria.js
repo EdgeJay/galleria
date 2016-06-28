@@ -119,6 +119,14 @@ export default class Galleria {
         }
     }
 
+    resizeThumbnails({ width }) {
+        if (!isNaN(width)) {
+            for (var section of this.sections) {
+                section.resizeThumbnails({ width });
+            }
+        }
+    }
+
     _onThumbnailCreated(section, thumbnailId, elem) {
         if (typeof this.onThumbnailCreated === 'function') {
             this.onThumbnailCreated(section.getId(), thumbnailId, elem);

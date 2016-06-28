@@ -62,6 +62,12 @@ export default class Thumbnail {
         }
     }
 
+    resize({ width }) {
+        if (this._node) {
+            this._node.style.width = `${width}px`;
+        }
+    }
+
     _onClick(evt) {
         this.toggleExpand();
     }
